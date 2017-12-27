@@ -71,7 +71,7 @@ public class httpClient {
 //	发送post请求
 	@Test
 	public void testPostRequest() throws UnsupportedEncodingException{
-/*********************** /		
+		
 //  创建CloseableHttpClient对象
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 //	创建	post对象
