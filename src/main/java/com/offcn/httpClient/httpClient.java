@@ -29,37 +29,37 @@ import org.junit.Test;
 
 public class httpClient {
 
-//	Ä£ÄâB/SÏµÍ³ÖĞµÄä¯ÀÀÆ÷£¬½«ÍøÂçÉÏµÄ×ÊÔ´¶ÁÈ¡µ½java³ÌĞòÖĞ
+//	æ¨¡æ‹ŸB/Sç³»ç»Ÿä¸­çš„æµè§ˆå™¨ï¼Œå°†ç½‘ç»œä¸Šçš„èµ„æºè¯»å–åˆ°javaç¨‹åºä¸­
 	@Test
-//	·¢ËÍgetÇëÇó,ÉèÖÃÇëÇóĞÅÏ¢£¬·µ»ØÏìÓ¦ĞÅÏ¢
+//	å‘é€getè¯·æ±‚,è®¾ç½®è¯·æ±‚ä¿¡æ¯ï¼Œè¿”å›å“åº”ä¿¡æ¯
 	public void testSendRequest(){
 		
-//	  ´´½¨CloseableHttpClient¶ÔÏó
+//	  åˆ›å»ºCloseableHttpClientå¯¹è±¡
 	CloseableHttpClient httpclient =HttpClients.createDefault();
-//	   ´´½¨getÇëÇó
+//	   åˆ›å»ºgetè¯·æ±‚
 	HttpGet get = new HttpGet("http://mil.firefox.sina.com/17/1222/17/KO2HN6QRVYD3P1XS.html");
-//   ÉèÖÃÇëÇóÍ·
-	get.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; W¡­) Gecko/20100101 Firefox/57.0");
+//   è®¾ç½®è¯·æ±‚å¤´
+	get.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Wâ€¦) Gecko/20100101 Firefox/57.0");
 	get.setHeader("Accept-Encoding","gzip, deflate");
-//	·¢ËÍÇëÇóÍ·µÄĞÅÏ¢,»ñÈ¡·µ»Ø¶ÔÏóHttpResponse
+//	å‘é€è¯·æ±‚å¤´çš„ä¿¡æ¯,è·å–è¿”å›å¯¹è±¡HttpResponse
 	try {
 		HttpResponse httpResponse =httpclient.execute(get);
-//	 ´ÓhttpResponse¶ÔÏóÖĞ»ñÈ¡ÏìÓ¦×´Ì¬Âë
+//	 ä»httpResponseå¯¹è±¡ä¸­è·å–å“åº”çŠ¶æ€ç 
 		StatusLine status = httpResponse.getStatusLine();
 		int code = status.getStatusCode();
-//	 ×´Ì¬Âë±íÊ¾200Ê¾ÒâÕı³£,³ÌĞòÕı³£ÔËĞĞ
+//	 çŠ¶æ€ç è¡¨ç¤º200ç¤ºæ„æ­£å¸¸,ç¨‹åºæ­£å¸¸è¿è¡Œ
 		if(code == 200){
-//	´Ó·şÎñÆ÷ÖĞµÄHttpResponse¶ÔÏóÖĞ»ñÈ¡ÏìÓ¦µÄÄÚÈİ
+//	ä»æœåŠ¡å™¨ä¸­çš„HttpResponseå¯¹è±¡ä¸­è·å–å“åº”çš„å†…å®¹
 		HttpEntity entity = httpResponse.getEntity();	
-//	Ê¹ÓÃEntityUtils¹¤¾ßÀàÖĞtoStirng·½·¨½«ÏìÓ¦µÄÄÚÈİ·µ»Ø¸ø¿Í»§¶Ë
+//	ä½¿ç”¨EntityUtilså·¥å…·ç±»ä¸­toStirngæ–¹æ³•å°†å“åº”çš„å†…å®¹è¿”å›ç»™å®¢æˆ·ç«¯
 		System.out.println(EntityUtils.toString(entity,"UTF-8"));
-//	»ØÊÕentityÄÚÈİ	
+//	å›æ”¶entityå†…å®¹	
 		EntityUtils.consume(entity);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-//	¹Ø±ÕÁ¬½Ó×ÊÔ´
+//	å…³é—­è¿æ¥èµ„æº
 	try {
 		httpclient.close();
 	} catch (IOException e) {
@@ -68,43 +68,43 @@ public class httpClient {
 	}
 	}
 	
-//	·¢ËÍpostÇëÇó
+//	å‘é€postè¯·æ±‚
 	@Test
 	public void testPostRequest() throws UnsupportedEncodingException{
-		
-//  ´´½¨CloseableHttpClient¶ÔÏó
+/*********************** /		
+//  åˆ›å»ºCloseableHttpClientå¯¹è±¡
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-//	´´½¨	post¶ÔÏó
+//	åˆ›å»º	postå¯¹è±¡
 		HttpPost httpPost = new HttpPost("http://localhost:8080/0503_Web/send");
-//	ÉèÖÃÇëÇóÍ·
+//	è®¾ç½®è¯·æ±‚å¤´
 		httpPost.setHeader("JDDD", "34455");
-//	ÉèÖÃÇëÇó²ÎÊı
+//	è®¾ç½®è¯·æ±‚å‚æ•°
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		list.add(new BasicNameValuePair("username","ddd"));
 		list.add(new BasicNameValuePair("password","1234"));
-//	°ÑÇëÇó²ÎÊı·â×°µ½httpPost¶ÔÏóÖĞ
+//	æŠŠè¯·æ±‚å‚æ•°å°è£…åˆ°httpPostå¯¹è±¡ä¸­
 		httpPost.setEntity(new UrlEncodedFormEntity(list));
-//	·¢ËÍÇëÇó
+//	å‘é€è¯·æ±‚
 		try {
 			CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-//	»ñÈ¡ÏìÓ¦×´Ì¬Âë
+//	è·å–å“åº”çŠ¶æ€ç 
 			StatusLine statusLine = httpResponse.getStatusLine();
 		    int code =statusLine.getStatusCode();
-//   ×´Ì¬ÂëÎª200±íÊ¾Õı³£
+//   çŠ¶æ€ç ä¸º200è¡¨ç¤ºæ­£å¸¸
 		    if(code == 200){
-//	 »ñÈ¡ÏìÓ¦ÄÚÈİ»áËÍ¸ø¿Í»§¶Ë
+//	 è·å–å“åº”å†…å®¹ä¼šé€ç»™å®¢æˆ·ç«¯
 		    HttpEntity entity = httpResponse.getEntity();
-//	Ê¹ÓÃEntityUtils¹¤¾ßÀàÖĞtoStirng·½·¨½«ÏìÓ¦µÄÄÚÈİ·µ»Ø¸ø¿Í»§¶Ë	 
+//	ä½¿ç”¨EntityUtilså·¥å…·ç±»ä¸­toStirngæ–¹æ³•å°†å“åº”çš„å†…å®¹è¿”å›ç»™å®¢æˆ·ç«¯	 
 		    String responseContent = EntityUtils.toString(entity, "UTF-8");
 		    System.out.println(responseContent);
-//	»ØÊÕentity×ÊÔ´
+//	å›æ”¶entityèµ„æº
 		    EntityUtils.consume(entity);
 		    }
 		} catch (Exception e) {
 		
 			e.printStackTrace();
 		} 
-//	¹Ø±ÕÁ¬½Ó
+//	å…³é—­è¿æ¥
 		try {
 			httpClient.close();
 		} catch (IOException e) {
@@ -113,41 +113,41 @@ public class httpClient {
 		}
 	}
 
-// ÎÄ¼şÉÏ´«
+// æ–‡ä»¶ä¸Šä¼ 
 	@Test
 	public void testUpload(){
-//		´´½¨CloseableHttpClient¶ÔÏó
+//		åˆ›å»ºCloseableHttpClientå¯¹è±¡
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-//	    ´´½¨post¶ÔÏó
+//	    åˆ›å»ºpostå¯¹è±¡
 		HttpPost httpPost = new HttpPost("http://localhost:8080/0503_Web/uploadServlet");
-//	  ÉèÖÃÇëÇóÍ·²ÎÊı
+//	  è®¾ç½®è¯·æ±‚å¤´å‚æ•°
 		httpPost.setHeader("kdkdd", "4k44444");
-//	 °Ñ±¾µØ´ÅÅÌÉÏµÄFileÎÄ¼ş¶ÔÏó×ª»»³ÉÖ§³ÖÍøÂç·¢ËÍµÄ±àÂë¶ÔÏó
+//	 æŠŠæœ¬åœ°ç£ç›˜ä¸Šçš„Fileæ–‡ä»¶å¯¹è±¡è½¬æ¢æˆæ”¯æŒç½‘ç»œå‘é€çš„ç¼–ç å¯¹è±¡
 		File file = new File("C:\\Users\\ibm\\Desktop\\u=398952501,2656845064&fm=27&gp=0.jpg");
 		FileBody fileBody = new FileBody(file);
-//	 °ÑÎÄ¼ş·â×°µ½HttpEntity	
+//	 æŠŠæ–‡ä»¶å°è£…åˆ°HttpEntity	
 		HttpEntity httpEntity = MultipartEntityBuilder.create()
 				.setMode(HttpMultipartMode.BROWSER_COMPATIBLE).addPart("uploadfile",fileBody).build();
-//   °ÑhttpEntity·â×°µ½httpPostÖĞ
+//   æŠŠhttpEntityå°è£…åˆ°httpPostä¸­
 		httpPost.setEntity(httpEntity);
-//	 ·¢ËÍÇëÇó
+//	 å‘é€è¯·æ±‚
 		try {
 			CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-//	Í¨¹ıhttpResponse»ñÈ¡×´Ì¬Âë
+//	é€šè¿‡httpResponseè·å–çŠ¶æ€ç 
 			StatusLine status = httpResponse.getStatusLine();
 			int code = status.getStatusCode();
 			if(code == 200){
 			HttpEntity entity =	httpResponse.getEntity();
 			String responseContent = EntityUtils.toString(entity, "UTF-8");
 		    System.out.println(responseContent);
-//	»ØÊÕentity×ÊÔ´
+//	å›æ”¶entityèµ„æº
 		    EntityUtils.consume(entity);
 			}
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		} 
-//	¹Ø±ÕÁ¬½Ó
+//	å…³é—­è¿æ¥
 		try {
 			httpClient.close();
 		} catch (IOException e) {
@@ -155,20 +155,20 @@ public class httpClient {
 			e.printStackTrace();
 		}
 	}
-//	ÎÄ¼şÏÂÔØ
+//	æ–‡ä»¶ä¸‹è½½
 	@Test
 	public void testDownload() throws ClientProtocolException, IOException{
-//		´´½¨CloseableHttpClient
+//		åˆ›å»ºCloseableHttpClient
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-//		´´½¨getÇëÇó
+//		åˆ›å»ºgetè¯·æ±‚
 		HttpGet httpGet  = new HttpGet("http://localhost:8080/0503_Web/kl.jpg");
-//		·¢ËÍÇëÇó
+//		å‘é€è¯·æ±‚
 		HttpResponse httpResponse =httpClient.execute(httpGet);
-//		´ÓhttpResponseÖĞ»ñÈ¡Òª·µ»ØµÄÄÚÈİ
+//		ä»httpResponseä¸­è·å–è¦è¿”å›çš„å†…å®¹
 		HttpEntity entity =httpResponse.getEntity();
-//		Ê¹ÓÃentityµÄgetContent·½·¨È¡µÃÊäÈëÁ÷
+//		ä½¿ç”¨entityçš„getContentæ–¹æ³•å–å¾—è¾“å…¥æµ
 			InputStream in = entity.getContent();
-			File file = new File("D:\\JFChart²âÊÔ\\upload\\1.jpg");
+			File file = new File("D:\\JFChartæµ‹è¯•\\upload\\1.jpg");
 			FileOutputStream os = new FileOutputStream(file);
 			int len = -1;
 			byte [] buffer = new byte[1024];
@@ -178,7 +178,7 @@ public class httpClient {
 			os.flush();
 			os.close();
 			in.close();
-//		¹Ø±ÕÍøÂçÁ¬½Ó
+//		å…³é—­ç½‘ç»œè¿æ¥
 		try {
 			httpClient.close();
 		} catch (IOException e) {
